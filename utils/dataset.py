@@ -16,7 +16,7 @@ from JetTagger.utils.tool import set_seed
 from functools import partial
 
 
-class QGJetDataset_v9pt15(Dataset):
+class PrivateDataset(Dataset):
     npz_keys = ['pf', 'pf_var', 'wgt'] #FIXME: Move to Config file in the near future
     Class = {'gluon': 0, 'quark': 1} #FIXME: Move to Config file in the near future
     batch_size = 512 #FIXME: Move to Config file in the near future
