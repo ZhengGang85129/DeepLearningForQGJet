@@ -1,0 +1,25 @@
+ParEmbed:
+  input_dim: 9
+  embed_dim:
+    - 128
+    - 512
+    - 128
+IntEmbed:
+  input_dim: 4
+  embed_dim:
+    - 64
+    - 64
+    - 64
+
+ParAtteBlock:
+  num_heads: 8
+  fc_dim: 512
+  dropout: 0.0
+
+ClassAtteBlock:
+  num_heads: 8
+  fc_dim: 512
+  dropout: 0.0
+
+num_ParAtteBlock: 8
+num_ClassAtteBlock: 2

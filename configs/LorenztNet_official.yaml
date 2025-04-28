@@ -1,0 +1,7 @@
+in_channels: 13
+n_hidden: 72
+n_scalar: 13
+n_class: 2
+n_layers: 6
+c_weight: 0.005
+dropout: 0.2
