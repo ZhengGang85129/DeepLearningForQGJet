@@ -4,7 +4,7 @@ DATA:
   classes: 2
 
 TRAIN:
-  model_name: Particle_Net
+  model_name: ParticleNet
   model_cfg_file: ./configs/ParticleNet_official.yaml
   save_path: JetTagger/output/ParticleNet
   manual_seed: 45678

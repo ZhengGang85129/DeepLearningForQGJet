@@ -1,5 +1,5 @@
 DATA:
-  data_name: JetClass_QuarkGluon 
+  data_name: JetClass_QuarkGluon  #Support PrivateDataset/JetClass_QuarkGluon 
   data_root: /ceph/work/ntuhep/zhenggang/QuarkGluon-OpenData/ 
   classes: 2
 
@@ -22,6 +22,7 @@ TRAIN:
   in_channels: 13
   batch_size_train: 64
   batch_size_validation: 256
+  num_workers: 8
 TEST:
   ckpt: JetTagger/output/MomentumCloudNet/model_last.pt
   batch_size_test: 1024

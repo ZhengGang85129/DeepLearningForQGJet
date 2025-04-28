@@ -4,7 +4,7 @@ DATA:
   classes: 2
 
 TRAIN:
-  model_name: ParT
+  model_name: ParticleTransformer
   model_cfg_file: JetTagger/configs/ParticleTransformer_official.yaml
   save_path: JetTagger/output/ParticleTransformer
   manual_seed: 12345
