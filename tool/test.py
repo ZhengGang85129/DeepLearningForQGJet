@@ -20,19 +20,13 @@ from torch.utils.data import DataLoader
 from JetTagger.utils import config
 from JetTagger.utils.read_model_configs import read_model_configs
 from JetTagger.model.model import *
-from JetTagger.utils.tool import set_seed, AverageMeter, Monitor
+from JetTagger.utils.tool import set_seed, AverageMeter
 import JetTagger.utils.config as config
-from JetTagger.utils.qgjet_dataset import QGJetDataset_v9pt15, JetClassOpenDataset 
 
 from JetTagger.utils.Validation import make_ROC_curve, make_probability
 
-from thop import profile
+from JetTagger.utils.dataset_configs import TEST_DATASET_CONFIGS
 
-#model = ...  # your PyTorch model
-#input = ...  # a sample input tensor
-
-#flops, params = profile(model, inputs=(input, ))
-#print(f"FLOPs: {flops}, Parameters: {params}")
 
 
 def get_device() -> torch.device:
@@ -47,8 +41,7 @@ def get_parser() -> argparse.ArgumentParser:
     args = parser.parse_args()
     assert args.config is not None
     
-    cfg = config.load_cfg_from_cfg_file(args.config) #FIXME
-    #cfg = config.merge_cfg_from_list(cfg, args.ckpt)
+    cfg = config.load_cfg_from_cfg_file(args.config) 
     return cfg 
     
 
@@ -79,10 +72,9 @@ def main() -> None:
     logger.info(f"=> Number of Classes: {args.classes}")
 
     with open(args.model_cfg_file, 'r') as file:
-        
         model_parameters = yaml.load(file, Loader = yaml.FullLoader) 
-    if args.model_name == 'JetCloudTransformer':
-       # model  = eval(args.model_name)(num_classes = args.classes, in_channels = args.in_channels, **read_model_configs(model = args.model_name, parameters = model_parameters))
+    
+    if args.model_name == 'MomentumCloudNet':
         model  = eval(args.model_name)(in_channels = args.in_channels, num_classes = args.classes, **read_model_configs(model = args.model_name, parameters = model_parameters))
     else:
         model = eval(args.model_name)(**read_model_configs(model = args.model_name, parameters = model_parameters))
@@ -96,71 +88,45 @@ def main() -> None:
         state_dict = checkpoint["state_dict"]
         new_state_dict = collections.OrderedDict()
         
-        ####model = torch.load(args.ckpt)
         for k, v in state_dict.items():
             new_state_dict[k] = v
         model.load_state_dict(new_state_dict, strict = True)
         logger.info(f"=> loaded ckpt : {args.ckpt} (epoch {checkpoint['epoch']})")
         args.epoch = checkpoint['epoch']
-        test_data = prepare_data()
         
-        test(model, test_data, criterion)
+        dataloader = create_dataloader()
+        
+        test(model, dataloader, criterion)
     else:
         raise RuntimeError(f"=> no checkpoint found at {args.ckpt}" )
 
-def prepare_data() -> torch.utils.data.DataLoader:
+def create_dataloader() -> torch.utils.data.DataLoader:
     
-    if args.data_name == 'qg_jet_v9pt15':
-        from JetTagger.utils.data_util import prepare_fn_v9pt15, collate_fn_v9pt15, collate_fn_v9pt15_batch_expansion
+    if args.data_name not in TEST_DATASET_CONFIGS:
+        raise ValueError(f'Dataset: {args.data_name} not supported.')
+    cfg = TEST_DATASET_CONFIGS[args.data_name]
+     
+    dataset =  cfg['dataset_class'](
+        split = 'test',        
+        prepare_fn = cfg['prepare_fn'], 
+        shuffle = True,
+        datasets_root = args.data_root)
         
-        if args.model_name == 'JetCloudTransformer':
-            collate_fn = collate_fn_v9pt15_batch_expansion
-        else:
-            collate_fn = collate_fn_v9pt15
-        
-        test_dataset = QGJetDataset_v9pt15(split = 'test', 
-                                            prepare_fn = prepare_fn_v9pt15, 
-                                            batch_shuffle = True,
-                                            data_shuffle = True, 
-                                            datasets_root = args.data_root)
-        test_dataloader = DataLoader(test_dataset, 
-                                      batch_size = 1, 
-                                      shuffle = False, 
-                                      drop_last = False,
-                                      pin_memory = True,
-                                      collate_fn =  collate_fn)
-    elif args.data_name == 'JetClass_QuarkGluon':
-        
-        from JetTagger.utils.data_util import prepare_fn_QuarkGluon_OpenData_test, collate_fn_QuarkGluon_OpenData_expansion_test, collate_fn_QuarkGluon_OpenData_test
-        
-        if args.model_name == 'JetCloudTransformer':
-            collate_fn = collate_fn_QuarkGluon_OpenData_expansion_test 
-            collate_fn = collate_fn_QuarkGluon_OpenData_test
-
-        else:
-            collate_fn = collate_fn_QuarkGluon_OpenData_test
-        
-        test_dataset = JetClassOpenDataset(split = 'test', 
-                                            prepare_fn = prepare_fn_QuarkGluon_OpenData_test, 
-                                            shuffle = True,
-                                            datasets_root = args.data_root)
-        test_dataloader = DataLoader(test_dataset, 
-                                      batch_size = args.batch_size_test, 
-                                      drop_last = False,
-                                      collate_fn =  collate_fn, 
-                                      num_workers = 2)
-    else:
-        raise Exception(f'{args.data_name} not supported.')
-
+    dataloader = DataLoader(
+        dataset, 
+        batch_size = args.batch_size_test, 
+        drop_last = False,
+        collate_fn =  cfg['collate_fn'], 
+        num_workers = args.num_workers)
     
-    return test_dataloader
+    return dataloader
+
 @torch.no_grad()
 def test(model: nn.Module, data: torch.utils.data.DataLoader, criterion: nn.modules.loss._WeightedLoss) -> None: 
          
     logger.info(">>>>>>>>>>>>>> Start Testing <<<<<<<<<<<<<<")
     batch_time = AverageMeter()
     loss_meter = AverageMeter() 
-    weight_meter = AverageMeter()
     correct_meter = AverageMeter()
     end = time.time() 
     dataset_per_epoch = len(data)  
@@ -172,65 +138,55 @@ def test(model: nn.Module, data: torch.utils.data.DataLoader, criterion: nn.modu
     
     model.eval()
     
-    FLOPs_measure(model = model)
-    raise ValueError()
     with torch.no_grad():
         
         for b_index, data in enumerate(data):
             
-                p = data.get('pf_var', None).to(device, non_blocking = True)
-                x = data.get('pf', None).to(device, non_blocking = True)
-                weight = data.get('wgt', None).to(device, non_blocking = True)
+                momentum = data.get('particle_momentums', None).to(device, non_blocking = True)
+                feat = data.get('particle_features', None).to(device, non_blocking = True)
                 target = data.get('y', None).to(device, non_blocking = True)
                 
                 indicator = data.get('indicator', None).to(device, non_blocking = True)
-                #if args.model_name == 'ParT':
-                #    input = [x, p]
-                #elif args.model_name == 'JetCloudTransformer':
-                #    o = data.get('offset', None).to(device, non_blocking = True)
-                #    input =  [[p, x, o]]
 
-                if args.model_name == 'ParT':
-                    input = [x, p]
+                if args.model_name == 'ParticleTransformer':
+                    input = [feat, momentum]
                     output = model(*input)
 
-                elif args.model_name == 'Particle_Net':
-                    input = torch.cat([p, x], dim = -1)
+                elif args.model_name == 'ParticleNet':
+                    input = torch.cat([momentum, feat], dim = -1)
                     output = model(input)
                 else:
-                    input = [x, p]
+                    input = [feat, momentum]
                     output = model(input)
-                loss = criterion(output, target) 
+                loss = criterion(output, target).sum() 
                 
-                loss = (loss * weight).sum() 
+             
                 
                 batch_time.update(time.time() - end)
                 
                 loss_meter.update(loss.item())
-                correct_meter.update(((output.argmax(1) == target).type(torch.float) * weight).sum().item()) 
-                weight_meter.update(weight.sum().item())
+                correct_meter.update(((output.argmax(1) == target).type(torch.float)).sum().item()) 
                 end = time.time()
                 
                 
                 Indicator.append(indicator)
                 pred.append(output[:, 1])
                 true.append(target)
-                weight_list.append(weight) 
                  
                 if ((b_index + 1) % args.print_freq) == 0:
                     logger.info(
                         f'[{b_index + 1}/{dataset_per_epoch}] '
                         f'Batch {batch_time.current_value*(1e3):.3f} ms ({batch_time.avg_value*(1e3):.3f} ms) '
-                        f'Loss {(loss_meter.current_value / weight_meter.current_value):.4f} ({(loss_meter.sum / weight_meter.sum):.4f}) '
-                        f'Acc {(correct_meter.current_value / weight_meter.current_value):.4f} ({(correct_meter.sum / weight_meter.sum):.4f})'
+                        f'Loss {(loss_meter.current_value ):.4f} ({(loss_meter.sum ):.4f}) '
+                        f'Acc {(correct_meter.current_value ):.4f} ({(correct_meter.sum):.4f})'
                         ) 
             
     
     logger.info(
         f'[{b_index + 1}/{dataset_per_epoch}] '
         f'Batch {batch_time.current_value*(1e3):.3f} ms ({batch_time.avg_value*(1e3):.3f} ms) '
-        f'Loss {(loss_meter.current_value / weight_meter.current_value):.4f} ({(loss_meter.sum / weight_meter.sum):.4f}) '
-        f'Acc {(correct_meter.current_value / weight_meter.current_value):.4f} ({(correct_meter.sum / weight_meter.sum):.4f})'
+        f'Loss {(loss_meter.current_value):.4f} ({(loss_meter.sum):.4f}) '
+        f'Acc {(correct_meter.current_value):.4f} ({(correct_meter.sum):.4f})'
         ) 
     
     
@@ -296,15 +252,6 @@ def plot_roc_curce(indicator: List, pred: List, true: List, weight: List) -> Non
     
     return 
 
-def FLOPs_measure(model: nn.Module) -> None:
-    
-    s = torch.randn(size = (1, 64, args.in_channels)).cuda()
-    p = torch.randn(size = (1, 64, 4)).cuda()
-
-    input = [s, p]
-    macs, params = profile(model, inputs=(input,))
-    logger.info(f'MACS: {macs}')
-    logger.info(f'params: {params}')
         
 if __name__ == "__main__":
     main()
