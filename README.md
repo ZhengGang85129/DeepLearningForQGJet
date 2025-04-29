@@ -1,5 +1,6 @@
 # JetTagger
-<img width="404" alt="image" src="https://github.com/user-attachments/assets/8e343290-32a0-4aef-b84e-4a660f9f92e0" />
+<img width="404" alt="image" src="https://github.com/user-attachments/assets/1cd2a69d-1209-4de4-bba0-62035b7c05fe" />
+
 
 ## Overview
 
