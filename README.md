@@ -1,5 +1,11 @@
 # JetTagger
-Deep Learning Model for Quark And Gluon Jet Tagging
+## Overview
+
+This project presents a deep learning framework for Quark and Gluon Jet classification, inspired by real-world challenges in high-energy physics experiments such as those at the CERN CMS detector.
+
+We implement a custom Transformer model with vector-based attention mechanisms and physics-informed features, achieving **state-of-the-art performance** on benchmark datasets. The model outperforms strong baselines including ParticleTransformer and ParticleNet, reaching an AUC of **0.9201** and accuracy of **0.849**.
+
+
 
 
 ## Installation Guide
