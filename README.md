@@ -1,15 +1,14 @@
 # JetTagger
-<img width="404" alt="image" src="https://github.com/user-attachments/assets/1cd2a69d-1209-4de4-bba0-62035b7c05fe" />
+
 
 
 ## Overview
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/1cd2a69d-1209-4de4-bba0-62035b7c05fe" width="45%" />
-  <img src="https://github.com/user-attachments/assets/337b5406-8398-4da3-bfbd-104f03e310fe" width="45%" />
+  <img src="https://github.com/user-attachments/assets/1cd2a69d-1209-4de4-bba0-62035b7c05fe" width="50%" />
+  <img src="https://github.com/user-attachments/assets/337b5406-8398-4da3-bfbd-104f03e310fe" width="42%" height="95%" />
 </p>
 
-<img width="342" alt="image" src="https://github.com/user-attachments/assets/337b5406-8398-4da3-bfbd-104f03e310fe" />
 
 This project presents a deep learning framework for Quark and Gluon Jet classification, inspired by real-world challenges in high-energy physics experiments such as those at the CERN CMS detector.
 
