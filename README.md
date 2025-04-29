@@ -98,6 +98,7 @@ If you have any questions, suggestions, or collaboration ideas, feel free to rea
 - Email: a0910555246@gmail.com
 - GitHub: [github.com/ZhengGang85129](https://github.com/ZhengGang85129)
 
+Thank you for your interest in this project! Contributions and feedback are always welcome.
 
 
 ## References
