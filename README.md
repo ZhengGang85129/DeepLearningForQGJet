@@ -10,6 +10,7 @@ We implement a custom Transformer model with vector-based attention mechanisms a
 
 ## Model Details
 <img width="342" alt="image" src="https://github.com/user-attachments/assets/337b5406-8398-4da3-bfbd-104f03e310fe" />
+![image](https://github.com/user-attachments/assets/517d6b0b-f16b-4e32-bf32-655af658e4d4)
 
 ### Motivation
 * Particle carries momentum vectors, intrinsic states (charge, particle type, etc)
