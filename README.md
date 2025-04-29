@@ -89,8 +89,8 @@ Our model demonstrates superior performance on the benchmark dataset for Jet cla
 |Our Model| 0.9201| 0.849|
 |ParticleTransformer* | 0.9181 | 0.846|
 |ParticleNet* | 0.9139 | 0.843 |
-|LorentzNet* | 0.844 | 0.9156 |
-
+|LorentzNet* | 0.9156 | 0.844 |
+ 
 * Note: model marked with an asterisk(*) are reported from their respective original papers.
 * The improvement of +0.3% in accuracy and +0.2% in AUC over ParticleTransformer demonstrates the effectiveness of our vector-based attention mechanism and physics-motivated design.
 ### Computation Complexity
