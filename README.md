@@ -82,9 +82,20 @@ Our model demonstrates superior performance on the benchmark dataset for Jet cla
 The distribution of attention entropy in different attention dimensions reflects the different patterns between quarks(cyan) and gluons(magenta). In most dimensions, quark jets show lower entropy(sharper attention).
 
 
-## Citation
+## References
 - [1] Qu, H., et al. "Particle Transformer for Jet Tagging." *arXiv 2022*. [arXiv:2202.03772](https://arxiv.org/abs/2202.03772)
 - [2] Qu, H., Gouskos, L. "ParticleNet: Jet Tagging via Particle Clouds." *arXiv 2020*. [arXiv:1902.08570](https://arxiv.org/abs/1902.08570)
 - [3] Gong, D., et al. "LorentzNet: Lorentz Equivariant Graph Neural Network for Particle Physics." *arXiv 2022*. [arXiv:2206.13598](https://arxiv.org/abs/2206.13598)
 
+## Citation
 
+If you use this codebase, please consider citing:
+
+```bibtex
+@misc{chen2024particlecloudnet,
+  author       = {Zheng-Gang Chen},
+  title        = {Quark and Gluon classification using Vector Attention},
+  year         = {2024},
+  howpublished = {\url{https://github.com/ZhengGang85129/YourRepoName}},
+  note         = {Work in progress}
+}
