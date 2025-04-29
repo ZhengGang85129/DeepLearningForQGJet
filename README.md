@@ -4,7 +4,7 @@ Deep Learning Model for Quark And Gluon Jet Tagging
 
 ## Installation Guide
 
-We recommend using Miniconda to manage the Python3 enviroment.
+We recommend using Miniconda to manage the Python3 environment.
 
 
 ### Step 1(Optional) : Install Miniconda
@@ -49,3 +49,30 @@ Note: Please check the YAML configuration file to ensure all settings are proper
 python3 ./JetTagger/tool/test.py --configs ./experiments/train_config_mcnet.yaml # Please check `TEST` part in the yaml file to ensure checkpoint you want to verify is adaptive to your local setting.
 ```
 Note: Please verify the `TEST` section in the YAML file to ensure that the checkpoint path and related settings are correctly adpated to your local environment
+
+# Performance
+
+## Results
+Our model demonstrates superior performance on the benchmark dataset for Jet classification.
+
+|Model Name| AUC | Accuracy |
+|:---------|:----|:---------|
+|Our Model| 0.9201| 0.849|
+|ParticleTransformer* | 0.9181 | 0.846|
+|ParticleNet* | 0.9139 | 0.843 |
+|LorentzNet* | 0.844 | 0.9156 |
+
+* Note: model marked with an asterisk(*) are reported from their respective original papers.
+* The improvement of +0.3% in accuracy and +0.2% in AUC over ParticleTransformer demonstrates the effectiveness of our vector-based attention mechanism and physics-motivated design.
+## Computation Complexity
+| Model Name | # parameters | MACs | Averaged inference time per event (run on single A100) |
+|:-----------|:-------------|:-----|:-------------------------------------------------------|
+| Our Model | 760 k | 1.42 B | 10.89 ms|
+| ParticleTransformer | 2.14 M | 1.56 B | 9.24 ms|
+
+## Model Interpretation (Attention Entropy)
+<img width="644" alt="image" src="https://github.com/user-attachments/assets/b85fce39-7f91-4522-b52d-c2d07cd1d9e0" />
+
+The distribution of attention entropy in different attention dimensions reflects the different patterns between quarks(cyan) and gluons(magenta). In most dimensions, quark jets show lower entropy(sharper attention).
+
+
