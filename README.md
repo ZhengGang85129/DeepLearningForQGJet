@@ -56,9 +56,9 @@ python3 ./JetTagger/tool/test.py --configs ./experiments/train_config_mcnet.yaml
 ```
 Note: Please verify the `TEST` section in the YAML file to ensure that the checkpoint path and related settings are correctly adpated to your local environment
 
-# Performance
+## Performance
 
-## Results
+### Results
 Our model demonstrates superior performance on the benchmark dataset for Jet classification.
 
 |Model Name| AUC | Accuracy |
@@ -70,15 +70,21 @@ Our model demonstrates superior performance on the benchmark dataset for Jet cla
 
 * Note: model marked with an asterisk(*) are reported from their respective original papers.
 * The improvement of +0.3% in accuracy and +0.2% in AUC over ParticleTransformer demonstrates the effectiveness of our vector-based attention mechanism and physics-motivated design.
-## Computation Complexity
+### Computation Complexity
 | Model Name | # parameters | MACs | Averaged inference time per event (run on single A100) |
 |:-----------|:-------------|:-----|:-------------------------------------------------------|
 | Our Model | 760 k | 1.42 B | 10.89 ms|
 | ParticleTransformer | 2.14 M | 1.56 B | 9.24 ms|
 
-## Model Interpretation (Attention Entropy)
+### Model Interpretation (Attention Entropy)
 <img width="644" alt="image" src="https://github.com/user-attachments/assets/b85fce39-7f91-4522-b52d-c2d07cd1d9e0" />
 
 The distribution of attention entropy in different attention dimensions reflects the different patterns between quarks(cyan) and gluons(magenta). In most dimensions, quark jets show lower entropy(sharper attention).
+
+
+## Citation
+- [1] Qu, H., et al. "Particle Transformer for Jet Tagging." *arXiv 2022*. [arXiv:2202.03772](https://arxiv.org/abs/2202.03772)
+- [2] Qu, H., Gouskos, L. "ParticleNet: Jet Tagging via Particle Clouds." *arXiv 2020*. [arXiv:1902.08570](https://arxiv.org/abs/1902.08570)
+- [3] Gong, D., et al. "LorentzNet: Lorentz Equivariant Graph Neural Network for Particle Physics." *arXiv 2022*. [arXiv:2206.13598](https://arxiv.org/abs/2206.13598)
 
 
