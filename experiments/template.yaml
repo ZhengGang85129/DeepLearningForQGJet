@@ -1,0 +1,26 @@
+DATA:
+  data_name: JetClass_QuarkGluon 
+  data_root: # Directoy to JetClass_OpenData  
+  classes: 2
+TRAIN:
+  model_name: #Option: MomentumCloudNet/ParticleTransformer/ParticleNet/LorentzNet
+  model_cfg_file: # ex: JetTagger/configs/MomentumCloudNet.yaml
+  save_path: #JetTagger/output/XXX
+  manual_seed: 45678
+  base_lr: # ex: 0.0001
+  epochs: # ex: 10
+  start_epoch: 0 
+  step_epoch: 5
+  eps: 0.00001
+  print_freq: 64 # print training details per 64 mini-batch
+  early_stop: 10 
+  save_freq: 1 # save checkpoint per epoch
+  resume:  False # path to latest checkpoint (default: none)
+  evaluate: True  # evaluate on validation set, extra gpu memory needed and small batch_size_val is recommend
+  evaluate_train: False # evaluate on train data set. (model.eval() mode)
+  in_channels: 13 # dimension of particle features.
+  batch_size_train: 64 
+  batch_size_validation: 1024
+TEST:
+  ckpt: #ex: JetTagger/output/XXX/model_best.pt
+  batch_size_test: 1
