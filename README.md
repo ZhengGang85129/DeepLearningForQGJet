@@ -16,13 +16,16 @@ We implement a custom Transformer model, named as MomentumCloudNet, with vector-
 
 ## Model Details
 
-![image](https://github.com/user-attachments/assets/b6eb4865-797d-4c35-b68a-fb9a660f4f96)
+<img width="908" alt="image" src="https://github.com/user-attachments/assets/ff31ea3a-8c77-4155-b0f5-74a981b5ac59" />
+
+
 
 
 ### Motivation
 * Particle carries momentum vectors, intrinsic states (charge, particle type, etc)
 * Existing particle transformer treat attention only as scalar weight, ignoring vectorial structure in interactions.
 
+![image](https://github.com/user-attachments/assets/b6eb4865-797d-4c35-b68a-fb9a660f4f96)
 ### Proposed Features
   * Vector Attention Mechanism
   * Dynamic momentum update
