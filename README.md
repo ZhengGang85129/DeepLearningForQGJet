@@ -99,10 +99,20 @@ Our model demonstrates superior performance on the benchmark dataset for Jet cla
 | Our Model | 760 k | 1.42 B | 10.89 ms|
 | ParticleTransformer | 2.14 M | 1.56 B | 9.24 ms|
 
+
+### Model Interpretation (Attention strength)
+
+<img width="815" alt="image" src="https://github.com/user-attachments/assets/7fce12b1-ca74-4e86-a99a-eefd65f242c6" />
+
+
+
+
 ### Model Interpretation (Attention Entropy)
 <img width="644" alt="image" src="https://github.com/user-attachments/assets/b85fce39-7f91-4522-b52d-c2d07cd1d9e0" />
 
 The distribution of attention entropy in different attention dimensions reflects the different patterns between quarks(cyan) and gluons(magenta). In most dimensions, quark jets show lower entropy(sharper attention).
+
+
 
 ## Contact
 If you have any questions, suggestions, or collaboration ideas, feel free to reach out:
