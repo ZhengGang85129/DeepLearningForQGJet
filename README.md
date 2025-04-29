@@ -92,10 +92,10 @@ The distribution of attention entropy in different attention dimensions reflects
 If you use this codebase, please consider citing:
 
 ```bibtex
-@misc{chen2024particlecloudnet,
+@misc{chen2024momentumcloudnet,
   author       = {Zheng-Gang Chen},
   title        = {Quark and Gluon classification using Vector Attention},
   year         = {2024},
-  howpublished = {\url{https://github.com/ZhengGang85129/YourRepoName}},
+  howpublished = {\url{https://github.com/ZhengGang85129/JetTagger}},
   note         = {Work in progress}
 }
