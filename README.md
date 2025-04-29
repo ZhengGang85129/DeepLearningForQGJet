@@ -1,9 +1,14 @@
 # JetTagger
+<img width="404" alt="image" src="https://github.com/user-attachments/assets/8e343290-32a0-4aef-b84e-4a660f9f92e0" />
+
 ## Overview
 
 This project presents a deep learning framework for Quark and Gluon Jet classification, inspired by real-world challenges in high-energy physics experiments such as those at the CERN CMS detector.
 
 We implement a custom Transformer model with vector-based attention mechanisms and physics-informed features, achieving **state-of-the-art performance** on benchmark datasets. The model outperforms strong baselines including ParticleTransformer and ParticleNet, reaching an AUC of **0.9201** and accuracy of **0.849**.
+
+## Model Details
+<img width="342" alt="image" src="https://github.com/user-attachments/assets/337b5406-8398-4da3-bfbd-104f03e310fe" />
 
 
 
