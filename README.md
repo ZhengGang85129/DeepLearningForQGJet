@@ -10,6 +10,7 @@ We implement a custom Transformer model with vector-based attention mechanisms a
 
 ## Model Details
 <img width="342" alt="image" src="https://github.com/user-attachments/assets/337b5406-8398-4da3-bfbd-104f03e310fe" />
+
 ### Motivation
 * Particle carries momentum vectors, intrinsic states (charge, particle type, etc)
 * Existing particle transformer treat attention only as scalar weight, ignoring vectorial structure in interactions.
