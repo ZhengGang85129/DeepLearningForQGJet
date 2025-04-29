@@ -92,6 +92,7 @@ The distribution of attention entropy in different attention dimensions reflects
 - [1] Qu, H., et al. "Particle Transformer for Jet Tagging." *arXiv 2022*. [arXiv:2202.03772](https://arxiv.org/abs/2202.03772)
 - [2] Qu, H., Gouskos, L. "ParticleNet: Jet Tagging via Particle Clouds." *arXiv 2020*. [arXiv:1902.08570](https://arxiv.org/abs/1902.08570)
 - [3] Gong, D., et al. "LorentzNet: Lorentz Equivariant Graph Neural Network for Particle Physics." *arXiv 2022*. [arXiv:2206.13598](https://arxiv.org/abs/2206.13598)
+- [4] Zhao,H., et al. "Point Transformer" *arXiv 2020*. [arXiv:2012.09164 ](https://arxiv.org/abs/2012.09164)
 
 ## Citation
 
