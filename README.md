@@ -27,6 +27,8 @@ We implement a custom Transformer model, named as MomentumCloudNet, with vector-
   * Vector Attention Mechanism
   * Dynamic momentum update
 
+
+
 ## Installation Guide
 
 We recommend using Miniconda to manage the Python3 environment.
