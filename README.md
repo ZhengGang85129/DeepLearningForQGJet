@@ -102,10 +102,12 @@ The distribution of attention entropy in different attention dimensions reflects
 
 ## Contact
 If you have any questions, suggestions, or collaboration ideas, feel free to reach out:
-
-- Email: a0910555246@gmail.com
-- GitHub: [github.com/ZhengGang85129](https://github.com/ZhengGang85129)
-
+* Zheng-Gang Chen
+  - Email: a0910555246@gmail.com
+  - GitHub: [github.com/ZhengGang85129](https://github.com/ZhengGang85129)
+* You-Ying Li
+  - Email: you-ying.li@cern.ch
+  - GitHub: [github.com/youyingli](https://github.com/youyingli)
 Thank you for your interest in this project! Contributions and feedback are always welcome.
 
 
