@@ -61,6 +61,8 @@ conda env create -f setup/enviroment.yml
 conda activate qgtagger_training # Enter conda
 conda deactivate                 # Exit conda
 ```
+
+
 ## Usage 
 ### Training
 ```
@@ -118,6 +120,23 @@ Thank you for your interest in this project! Contributions and feedback are alwa
 - [2] Qu, H., Gouskos, L. "ParticleNet: Jet Tagging via Particle Clouds." *arXiv 2020*. [arXiv:1902.08570](https://arxiv.org/abs/1902.08570)
 - [3] Gong, D., et al. "LorentzNet: Lorentz Equivariant Graph Neural Network for Particle Physics." *arXiv 2022*. [arXiv:2206.13598](https://arxiv.org/abs/2206.13598)
 - [4] Zhao,H., et al. "Point Transformer" *arXiv 2020*. [arXiv:2012.09164 ](https://arxiv.org/abs/2012.09164)
+
+For Quark and Gluon open dataset, we use
+
+```bibtex
+@dataset{komiske_patrick_2019_3164691,
+  author       = {Komiske, Patrick and
+                  Metodiev, Eric and
+                  Thaler, Jesse},
+  title        = {Pythia8 Quark and Gluon Jets for Energy Flow},
+  month        = may,
+  year         = 2019,
+  publisher    = {Zenodo},
+  version      = {v1},
+  doi          = {10.5281/zenodo.3164691},
+  url          = {https://doi.org/10.5281/zenodo.3164691}
+}
+```
 
 ## Citation
 
