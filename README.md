@@ -56,14 +56,14 @@ conda deactivate                 # Exit conda
 ## Usage 
 ### Training
 ```
-python3 ./JetTagger/tool/train.py --configs ./experiments/template.yaml 
+python3 ./DeepLearningForQGJet/tool/train.py --configs ./experiments/template.yaml 
 ```
 Note: Please check the YAML configuration file to ensure all settings are properly adapted to your local environment.
 
 ### Inference
 
 ```
-python3 ./JetTagger/tool/test.py --configs ./experiments/train_config_mcnet.yaml # Please check `TEST` part in the yaml file to ensure checkpoint you want to verify is adaptive to your local setting.
+python3 ./DeepLearningForQGJet/tool/test.py --configs ./experiments/train_config_mcnet.yaml # Please check `TEST` part in the yaml file to ensure checkpoint you want to verify is adaptive to your local setting.
 ```
 Note: Please verify the `TEST` section in the YAML file to ensure that the checkpoint path and related settings are correctly adpated to your local environment
 
